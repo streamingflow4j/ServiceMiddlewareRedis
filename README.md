@@ -1,5 +1,5 @@
 # ServiceMiddlewareRedis
-
+## After Run the service Middleware
 ## Open a new terminal: 
 redis-cli
 SUBSCRIBE si.ceprule.queue
