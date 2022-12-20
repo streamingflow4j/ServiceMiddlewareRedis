@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import com.espertech.esper.client.Configuration;
@@ -48,17 +49,17 @@ public class MonitorEventHandler implements InitializingBean {
 	private AtomicLong eventsHandledMicroseconds;
 	private Configuration config;
 	int count = 0;
-    
-    private JedisConnectionFactory jedisConnectionFactory;
 
+	private StringRedisTemplate stringRedisTemplate;
+	
 	/**
 	 * Configure Esper Statement(s).
 	 * 
 	 * @throws Exception
 	 */
 	
-	public MonitorEventHandler(JedisConnectionFactory jedisConnectionFactory) throws Exception {
-		this.jedisConnectionFactory = jedisConnectionFactory;
+	public MonitorEventHandler(StringRedisTemplate stringRedisTemplate) throws Exception {
+		this.stringRedisTemplate = stringRedisTemplate;
 		initService();
 	}
 
@@ -76,7 +77,7 @@ public class MonitorEventHandler implements InitializingBean {
 			createBeans(myEntity);
 		} else {
 			if (monitorEventSubscriber == null) {
-				monitorEventSubscriber = new MonitorEventSubscriber(jedisConnectionFactory); 
+				monitorEventSubscriber = new MonitorEventSubscriber(stringRedisTemplate); 
 			}
 			verify = monitorEventSubscriber.setMyEntity(myEntity);
 			if (verify.equals(CollectType.NONE.getName())) {

@@ -13,6 +13,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.Message;
 import org.springframework.data.redis.connection.MessageListener;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.service.middleware.cep.handler.MonitorEventHandler;
@@ -23,8 +24,8 @@ public class RedisMessageListener implements MessageListener {
 
 	@Autowired
 	private MonitorEventHandler monitorEventHandler;
-
-	private JedisConnectionFactory jedisConnectionFactory;
+	
+	private StringRedisTemplate stringRedisTemplate;
 
 	private static final Logger LOG = LoggerFactory.getLogger(RedisMessageListener.class);
 
@@ -33,8 +34,8 @@ public class RedisMessageListener implements MessageListener {
 	private Environment env;
 
 
-	public RedisMessageListener(Environment env, JedisConnectionFactory jedisConnectionFactory) throws Exception {
-		this.jedisConnectionFactory = jedisConnectionFactory;
+	public RedisMessageListener(Environment env, StringRedisTemplate stringRedisTemplate) throws Exception {
+		this.stringRedisTemplate = stringRedisTemplate;
 		this.env = env;
 	}
 
@@ -47,11 +48,8 @@ public class RedisMessageListener implements MessageListener {
 		if (topicChannel == null || messageBody == null) {
 			return;
 		}
-
 		String msg = new String(messageBody);
 		String topic = new String(topicChannel);
-		//// System.out.println("topic：" + topic + " msg：" + msg);
-
 		if (topic.equals(env.getProperty("queue.streaming.data"))) {
 			try {
 				fireEvent(msg);
@@ -76,7 +74,7 @@ public class RedisMessageListener implements MessageListener {
 			IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		try {
 			if (monitorEventHandler == null) {
-				monitorEventHandler = new MonitorEventHandler(jedisConnectionFactory);
+				monitorEventHandler = new MonitorEventHandler(stringRedisTemplate);
 			}
 			Entity event = objectMapper.readValue(payload, Entity.class);
 			monitorEventHandler.handleEntity(event);
@@ -91,7 +89,7 @@ public class RedisMessageListener implements MessageListener {
 		Entity myEntity = objectMapper.readValue(payload, Entity.class);
 		try {
 			if (monitorEventHandler == null) {
-				monitorEventHandler = new MonitorEventHandler(jedisConnectionFactory);
+				monitorEventHandler = new MonitorEventHandler(stringRedisTemplate);
 			}
 			monitorEventHandler.createRequestMonitorExpression(myEntity);
 		} catch (Exception e) {

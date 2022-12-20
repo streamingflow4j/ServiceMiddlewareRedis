@@ -4,9 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
@@ -22,14 +19,10 @@ public class MonitorEventSubscriber implements StatementSubscriber {
 	Entity myEntity;
 
 	private StringRedisTemplate stringRedisTemplate;
-	
-	private JedisConnectionFactory jedisConnectionFactory;
 
-	/** Logger */
-	private static final Logger LOG = LoggerFactory.getLogger(MonitorEventSubscriber.class);
 	
-	public MonitorEventSubscriber(JedisConnectionFactory jedisConnectionFactory) {
-        this.jedisConnectionFactory = jedisConnectionFactory;
+	public MonitorEventSubscriber(StringRedisTemplate stringRedisTemplate) {
+        this.stringRedisTemplate = stringRedisTemplate;
     }
 
 	/**
@@ -58,12 +51,6 @@ public class MonitorEventSubscriber implements StatementSubscriber {
 		}
 		@SuppressWarnings("resource")
 		String payload = getPayload(sb.toString());
-
-		if (stringRedisTemplate == null) {	
-			stringRedisTemplate = new StringRedisTemplate();
-			stringRedisTemplate.setConnectionFactory(jedisConnectionFactory);
-			stringRedisTemplate.afterPropertiesSet();
-		}
 
 		for (Entry<String, String> entry : eventUpdate.entrySet()) {
 
@@ -125,7 +112,6 @@ public class MonitorEventSubscriber implements StatementSubscriber {
 	}
 
 	public boolean verifyDelRule(Entity myEntity) {
-		LOG.info("Trayng to delete");
 		boolean result = false;
 
 		if (myEntity.getType().equals(CollectType.DEL_RULE_TYPE.getName())) {

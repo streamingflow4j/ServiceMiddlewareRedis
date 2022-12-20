@@ -73,7 +73,7 @@ public class RedisConfig {
 
 	@Bean
 	public MessageListenerAdapter messageListener() throws Exception {
-		return new MessageListenerAdapter(new RedisMessageListener(env, jedisConnectionFactory()));
+		return new MessageListenerAdapter(new RedisMessageListener(env, stringRedisTemplate(jedisConnectionFactory())));
 	}
 
 	@Bean
