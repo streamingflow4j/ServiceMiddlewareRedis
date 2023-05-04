@@ -1,0 +1,39 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.2.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.service.middleware'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+jar {
+	archiveBaseName = 'ServiceMiddlewareRedis'
+	archiveVersion =  '0.0.1'
+}
+
+dependencies {
+	// tag::actuator[]
+	   implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	// end::actuator[]
+	   implementation 'org.springframework.boot:spring-boot-starter-web'
+	// tag::tests[]
+	   testImplementation('org.springframework.boot:spring-boot-starter-test')
+	// end::tests[]
+	// https://mvnrepository.com/artifact/com.espertech/esper
+	   implementation group: 'com.espertech', name: 'esper', version: '7.1.0'
+	// https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
+	   implementation group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+
+	   implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+	   implementation 'redis.clients:jedis:3.1.0'
+}
+
+test {
+	useJUnitPlatform()
+}

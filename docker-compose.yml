@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  redis-server:
+    container_name: "redis-server"
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    networks:
+      - redis_go_net
+    volumes:
+      - ./redis-volume:/data
+
+
+  middleware-redis:
+    container_name: middleware-redis
+    build:
+      context: ./build/libs
+      dockerfile: ./Dockerfile
+    image: middleware-redis:latest
+    ports:
+      - '8080:8080'
+    environment:
+      JAR_NAME: spring-boot-0.0.1-SNAPSHOT.jar
+      REDIS_HOST: "redis-server"
+      REDIS_PORT: 6379
+    links:
+      - redis-server
+    depends_on:
+      - redis-server
+    networks:
+      - redis_go_net
+
+networks:
+  redis_go_net:
+    driver: bridge
