@@ -1,0 +1,24 @@
+
+`	java:S112&"FDefine and throw a dedicated exception instead of using a generic one.(¶±ã‰ûÿÿÿÿ
+X
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ
+“
+java:S1130&"qRemove the declaration of thrown exception 'java.lang.Exception', as it cannot be thrown from constructor's body.(¶±ã‰ûÿÿÿÿ8¿Œáİß1
+M
+java:S1135-"2Complete the task associated to this TODO comment.(» æÿÿÿÿÿ
+M
+java:S1135;"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ
+M
+java:S1135B"2Complete the task associated to this TODO comment.(ÕÌ®şÿÿÿÿ
+W
+java:S3457T"AFormat specifiers should be used instead of string concatenation.(Âµßª
+H
+java:S1135S"2Complete the task associated to this TODO comment.(‡ñÅ¼
+¬
+java:S1130Y"Remove the declaration of thrown exception 'com.fasterxml.jackson.databind.JsonMappingException' which is a subclass of 'java.io.IOException'.(ÀŸØï8õµĞİß1
+W
+java:S3457b"AFormat specifiers should be used instead of string concatenation.(Âµßª
+H
+java:S1135a"2Complete the task associated to this TODO comment.(‡ñÅ¼
+;
+java:S1128"Remove this duplicated import.(Á•½8ãŒáİß1
