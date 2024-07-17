@@ -1,19 +1,17 @@
 # ServiceMiddlewareRedis
 
 ## After Run the service Middleware
-## Open a new terminal: 
+1. Open a new terminal: 
 ```
 redis-cli
 SUBSCRIBE si.ceprule.queue
 ```
-## Open a new terminal: 
+2. Open a new terminal: 
 ```
 redis-cli
 SUBSCRIBE si.cep.queue
 ```
-## Open a new terminal: 
-
-```
+3. Open a new terminal: 
 redis-cli:
 a) Create Event
 ```
