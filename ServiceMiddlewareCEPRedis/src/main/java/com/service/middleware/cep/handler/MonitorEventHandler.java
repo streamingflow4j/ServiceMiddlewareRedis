@@ -73,7 +73,7 @@ public class MonitorEventHandler implements InitializingBean {
 
 	public void createRequestMonitorExpression(Entity myEntity) throws Exception {
 		String verify = "";
-		if (myEntity.getType().equals(CollectType.ADD_EVENT_TYPE.getName())) {
+		if (myEntity.getType().equals(CollectType.EVENT_CREATE_TYPE.getName())) {
 			createBeans(myEntity);
 		} else {
 			if (monitorEventSubscriber == null) {
