@@ -11,8 +11,10 @@ SUBSCRIBE si.ceprule.queue
 redis-cli
 SUBSCRIBE si.cep.queue
 ```
-3. Open a new terminal: 
-redis-cli:
+3. Open a new terminal:
+   
+- redis-cli:
+  
 a) Create Event
 ```
 PUBLISH si.ceprule.queue "{\"type\" : \"EVENT_CREATE\", \"id\" : \"Termometer\", \"attributes\" : [{ \"name\"  : \"id\", \"type\"  : \"String\", \"value\" : \"0\" },{\"name\" : \"temperature\", \"type\"  : \"Double\", \"value\" : \"0\" }]}"
