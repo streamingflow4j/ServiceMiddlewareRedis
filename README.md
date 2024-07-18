@@ -1,4 +1,10 @@
-# ServiceMiddlewareRedis
+# StreamingFlow4J: Event Driven Framework with inference engine for Complex Event Processing
+
+## 🤔 What is it used for? 
+Add Complex Event Processing with Event-Driven, CQRS, Message Route to Java applications.
+
+## About this project (ServiceMiddlewareRedis)
+This project is a contextual middleware made with java, Spring Boot, Redis and EsperCEP.
 
 ## After Run the service Middleware
 1. Open a new terminal: 
@@ -27,7 +33,13 @@ c) Produce Data
 ```
 PUBLISH si.test.queue "{\"type\" : \"Termometer\",\"id\" : \"1\", \"attributes\" : [{ \"name\" : \"temperature\", \"type\" : \"Double\", \"value\" : \"2\"}]}"# ServiceMiddlewareRedis
 ```
-## License and Citation
+
+## ⭐ Give us a star!
+
+Like what you see? Please consider giving this a star (★)!
+
+## 🏷️ License and Citation
+
 The code is available under Apache License.
 If you find this project helpful in your research, please cite this work at
 
