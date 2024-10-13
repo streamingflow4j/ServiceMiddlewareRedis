@@ -1,0 +1,11 @@
+
+|
+java:S1488>"_Immediately return this expression instead of assigning it to the temporary variable "factory".(ªòº²8ŸùÆøß1
+_
+java:S6813)"BRemove this field injection and use constructor injection instead.(êæÄŞ8ãùÆøß1
+s
+java:S3305*"VInject this field value directly into "messageListener", the only method that uses it.(«ª“ø8çùÆøß1
+X	java:S1250"<This block of commented-out lines of code should be removed.(‰†ã»8öùÆøß1
+X	java:S1253"<This block of commented-out lines of code should be removed.(•áï”8÷ùÆøß1
+T
+java:S11351"2Complete the task associated to this TODO comment.(ƒŠ® úÿÿÿÿ8øùÆøß1
