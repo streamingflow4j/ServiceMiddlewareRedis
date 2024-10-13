@@ -14,12 +14,12 @@ services:
       - ./redis-volume:/data
 
 
-  middleware-redis:
-    container_name: middleware-redis
+  streamingflow4j-redis:
+    container_name: streamingflow4j-redis
     build:
       context: ./build/libs
       dockerfile: ./Dockerfile
-    image: middleware-redis:latest
+    image: streamingflow4j-redis:latest
     ports:
       - '8080:8080'
     environment:
