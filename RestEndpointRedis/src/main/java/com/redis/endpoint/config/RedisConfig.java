@@ -1,6 +1,5 @@
-package com.service.streamingflow4j.config;
+package com.redis.endpoint.config;
 
-import com.service.streamingflow4j.util.RedisMessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +12,18 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
+import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import redis.clients.jedis.HostAndPort;
 
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Configuration
@@ -46,52 +52,20 @@ public class RedisConfig {
     
 	public RedisConfig() {
 	//	super();
-		// TODO Auto-generated constructor stub
 		 
 //	     LOGGER.info("{}={}", "spring.redis.port", env.getProperty("spring.redis.port"));
 //	     LOGGER.info("{}={}", "spring.redis.channel.events", env.getProperty("spring.redis.channel.events"));
 	}
-
 	@Bean
-	@Primary
-	public JedisConnectionFactory jedisConnectionFactory() {
-		JedisClientConfiguration clientConfig = JedisClientConfiguration.builder().usePooling().build();
-		RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(redisHost, redisPort);
-		JedisConnectionFactory factory = new JedisConnectionFactory(config,clientConfig);
-		return factory;
-	}
-
-
-	@Bean
-	@Primary
-	public StringRedisTemplate stringRedisTemplate(RedisConnectionFactory connectionFactory) {
-		StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-		stringRedisTemplate.setConnectionFactory(connectionFactory);
-		return stringRedisTemplate;
+	LettuceConnectionFactory connectionFactory() {
+		return new LettuceConnectionFactory();
 	}
 
 	@Bean
-	public MessageListenerAdapter messageListener() throws Exception {
-		return new MessageListenerAdapter(new RedisMessageListener(env, stringRedisTemplate(jedisConnectionFactory())));
+	RedisTemplate<String, String> redisTemplate(RedisConnectionFactory connectionFactory) {
+
+		RedisTemplate<String, String> template = new RedisTemplate<>();
+		template.setConnectionFactory(connectionFactory);
+		return template;
 	}
-
-	@Bean
-	public ChannelTopic topic() {
-		LOGGER.debug(queueRule);
-		return new ChannelTopic(queueRule);
-	}
-
-	@Bean
-	public RedisMessageListenerContainer redisContainer(RedisConnectionFactory connectionFactory,
-			MessageListenerAdapter messageListener) throws Exception {
-		RedisMessageListenerContainer container = new RedisMessageListenerContainer();
-		
-		LOGGER.debug(queueStreaming);
-		container.setConnectionFactory(connectionFactory);
-		container.addMessageListener(messageListener(), topic());
-		container.addMessageListener(messageListener(), new ChannelTopic(queueStreaming));
-		return container;
-	}
-
-
 }
