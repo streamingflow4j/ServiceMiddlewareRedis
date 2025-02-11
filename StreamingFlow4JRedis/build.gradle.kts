@@ -37,8 +37,6 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.burningwave/core
 	implementation("org.burningwave:core:12.65.2")
 
-
-
 }
 
 dependencyManagement {
