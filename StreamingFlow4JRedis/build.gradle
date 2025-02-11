@@ -10,6 +10,7 @@ sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
+	mavenLocal()
 }
 
 dependencies {
@@ -33,7 +34,6 @@ dependencies {
 	implementation group: 'redis.clients', name: 'jedis', version: '3.6.0'
 	// https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 	implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.16.1'
-	testImplementation 'junit:junit:4.13.1'
 	testImplementation 'junit:junit:4.13.1'
 
 

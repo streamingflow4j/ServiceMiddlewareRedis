@@ -1,23 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <annotationProcessing>
-      <profile name="Maven default annotation processors profile" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-      </profile>
-    </annotationProcessing>
-    <bytecodeTargetLevel target="1.8">
-      <module name="ServiceMiddlewareCEPRedis" target="11" />
-      <module name="StreamingFlow4JRedis" target="11" />
-    </bytecodeTargetLevel>
+    <bytecodeTargetLevel target="21" />
   </component>
   <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="ServiceMiddlewareCEPRedis" options="-parameters" />
-      <module name="StreamingFlow4JRedis" options="-parameters" />
-      <module name="spring-boot" options="-parameters" />
-    </option>
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-XX:--add-modules=ALL-SYSTEM" />
   </component>
 </project>
