@@ -4,14 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-
 import com.service.streamingflow4j.model.Attributes;
 import com.service.streamingflow4j.model.CollectType;
 import com.service.streamingflow4j.model.Entity;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
-
-
 
 @Component
 public class MonitorEventSubscriber implements StatementSubscriber {

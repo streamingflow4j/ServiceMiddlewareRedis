@@ -26,6 +26,10 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
+	// https://mvnrepository.com/artifact/org.antlr/antlr4-runtime
+	implementation("org.antlr:antlr4-runtime:4.7")
+
+
 	// https://mvnrepository.com/artifact/redis.clients/jedis
 	implementation("redis.clients:jedis:5.3.0-beta1")
 	// https://mvnrepository.com/artifact/com.espertech/esper

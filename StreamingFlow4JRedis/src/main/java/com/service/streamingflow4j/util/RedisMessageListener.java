@@ -11,6 +11,7 @@ import com.service.streamingflow4j.model.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.json.JsonParseException;
 import org.springframework.core.env.Environment;
 import org.springframework.data.redis.connection.Message;
@@ -36,6 +37,16 @@ public class RedisMessageListener implements MessageListener {
 
 	private Environment env;
 
+	private String queueStreaming;
+
+	private String queueRule;
+
+	public void setQueueStreaming(String queueStreaming){
+		this.queueStreaming = queueStreaming;
+	}
+	public void  setQueueRule(String queueRule){
+		this.queueRule = queueRule;
+	}
 
 	public RedisMessageListener(Environment env, StringRedisTemplate stringRedisTemplate) throws Exception {
 		this.stringRedisTemplate = stringRedisTemplate;
@@ -44,28 +55,25 @@ public class RedisMessageListener implements MessageListener {
 
 	@Override
 	public void onMessage(Message message, byte[] pattern) {
-		// TODO Auto-generated method stub
 
 		byte[] topicChannel = message.getChannel();
 		byte[] messageBody = message.getBody();
 		if (topicChannel == null || messageBody == null) {
 			return;
 		}
-		String msg = new String(messageBody).substring(7);
+		String msg = new String(messageBody);
 		String topic = new String(topicChannel);
-		if (topic.equals(env.getProperty("queue.streaming.data"))) {
+		if (topic.equals(queueStreaming)) {
 			try {
 				fireEvent(msg);
 			} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException |
                      InvocationTargetException | JsonProcessingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		} else if (topic.equals(env.getProperty("queue.rule.cep"))) {
+		} else if (topic.equals(queueRule)) {
 			try {
 				toModel(msg);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
@@ -82,7 +90,6 @@ public class RedisMessageListener implements MessageListener {
 			Entity event = objectMapper.readValue(payload, Entity.class);
 			monitorEventHandler.handleEntity(event);
 		} catch (Exception e) {
-			// TODO: handle exception
 			LOG.error("Error! ===>> " + e);
 		}
 
@@ -96,7 +103,6 @@ public class RedisMessageListener implements MessageListener {
 			}
 			monitorEventHandler.createRequestMonitorExpression(myEntity);
 		} catch (Exception e) {
-			// TODO: handle exception
 			LOG.error("Error! ===>> " + e);
 		}
 

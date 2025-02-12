@@ -11,7 +11,7 @@ services:
       - '8080:8080'
     environment:
       JAR_NAME: endpoint-0.0.1-SNAPSHOT.jar
-      REDIS_HOST: "redis-server" #"host.docker.internal:redis-server"
+      REDIS_HOST: redis
       REDIS_PORT: 6379
       REDIS_STREAMING_QUEUE: si.test.queue
       REDIS_RULE_QUEUE: si.ceprule.queue
@@ -21,3 +21,4 @@ services:
 networks:
   redis_go_net:
     driver: bridge
+    external: true

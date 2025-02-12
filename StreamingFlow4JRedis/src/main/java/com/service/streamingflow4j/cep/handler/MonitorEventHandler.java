@@ -8,7 +8,6 @@ import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
-
 import com.service.streamingflow4j.cep.subscribe.MonitorEventSubscriber;
 import com.service.streamingflow4j.model.Attributes;
 import com.service.streamingflow4j.model.CollectType;
@@ -29,11 +28,7 @@ import com.espertech.esper.client.EPServiceProvider;
 import com.espertech.esper.client.EPServiceProviderManager;
 import com.espertech.esper.client.EPStatement;
 
-/*
-import net.sf.cglib.beans.BeanGenerator;
-import net.sf.cglib.core.NamingPolicy;
-import net.sf.cglib.core.Predicate;
-*/
+
 @Component
 @Scope(value = "singleton")
 public class MonitorEventHandler implements InitializingBean {
