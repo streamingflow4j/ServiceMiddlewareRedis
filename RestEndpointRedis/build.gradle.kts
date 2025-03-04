@@ -24,11 +24,16 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework/spring-beans
 	implementation("org.springframework:spring-beans:7.0.0-M1")
 
-
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 	implementation("org.springframework.boot:spring-boot-starter-data-redis")
 	implementation("redis.clients:jedis")
+	//Zipkin Observability////
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("io.micrometer:micrometer-tracing-bridge-brave")
+	implementation("io.zipkin.reporter2:zipkin-reporter-brave")
+
 }
 
 tasks.withType<Test> {

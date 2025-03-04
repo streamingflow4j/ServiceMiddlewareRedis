@@ -24,6 +24,7 @@ services:
     ports:
       - '8181:8181'
     environment:
+      ZIPKIN_ENDPOINT: http://zipkin:9411/api/v2/spans
       JAR_NAME: streamingflow4j-0.0.1-SNAPSHOT.jar
       REDIS_HOST: redis
       REDIS_PORT: 6379
@@ -48,6 +49,23 @@ services:
     networks:
       - redis_go_net
 
+  zipkin:
+    image: ghcr.io/openzipkin/zipkin-slim:${TAG:-latest}
+    container_name: zipkin
+    # Environment settings are defined here https://github.com/openzipkin/zipkin/blob/master/zipkin-server/README.md#environment-variables
+    environment:
+      - STORAGE_TYPE=mem
+      # Uncomment to enable self-tracing
+      - SELF_TRACING_ENABLED=true
+      # Uncomment to increase heap size
+      # - JAVA_OPTS=-Xms128m -Xmx128m -XX:+ExitOnOutOfMemoryError
+    ports:
+      # Port used for the Zipkin UI and HTTP Api
+      - 9411:9411
+    # Uncomment to enable debug logging
+    # command: --logging.level.zipkin2=DEBUG
+    networks:
+      - redis_go_net
 
 networks:
   redis_go_net:

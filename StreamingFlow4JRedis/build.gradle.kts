@@ -29,7 +29,6 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.antlr/antlr4-runtime
 	implementation("org.antlr:antlr4-runtime:4.7")
 
-
 	// https://mvnrepository.com/artifact/redis.clients/jedis
 	implementation("redis.clients:jedis:5.3.0-beta1")
 	// https://mvnrepository.com/artifact/com.espertech/esper
@@ -40,6 +39,13 @@ dependencies {
 	implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
 	// https://mvnrepository.com/artifact/org.burningwave/core
 	implementation("org.burningwave:core:12.65.2")
+	//Zipkin observability////
+	implementation("org.springframework.boot:spring-boot-starter-validation")
+	implementation("org.springframework.boot:spring-boot-starter-actuator")
+	implementation("io.micrometer:micrometer-tracing-bridge-brave")
+	implementation("io.zipkin.reporter2:zipkin-reporter-brave")
+
+
 
 }
 
