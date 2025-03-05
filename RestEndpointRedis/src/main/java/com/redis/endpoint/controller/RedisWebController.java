@@ -25,35 +25,35 @@ public class RedisWebController {
     @PostMapping(value = "/data/create")
     public ResponseEntity<String> newEntity(@RequestBody Entity entity) throws JsonProcessingException {
         redisSender.sendData(entity);
-        return ResponseEntity.ok(gson.toJson("Message sent to the Kafka JavaInUse Successfully"));
+        return ResponseEntity.ok(gson.toJson("Message sent to Redis JavaInUse Successfully"));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/event/create")
     public ResponseEntity<String> newEvent(@RequestBody Entity entity) throws JsonProcessingException {
         redisSender.sendRule(entity);
-        return ResponseEntity.ok(gson.toJson("Message sent to the Kafka JavaInUse Successfully"));
+        return ResponseEntity.ok(gson.toJson("Message sent to the Redis JavaInUse Successfully"));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping(value = "/rule/create")
     public ResponseEntity<String> createRule(@RequestBody Entity entity) throws JsonProcessingException {
         redisSender.sendRule(entity);
-        return ResponseEntity.ok(gson.toJson("Message sent to the Kafka JavaInUse Successfully"));
+        return ResponseEntity.ok(gson.toJson("Message sent to the Redis JavaInUse Successfully"));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @PutMapping(value = "/rule/update")
     public ResponseEntity<String> updateRule(@RequestBody Entity entity) throws JsonProcessingException {
         redisSender.sendRule(entity);
-        return ResponseEntity.ok(gson.toJson("Message sent to the Kafka JavaInUse Successfully"));
+        return ResponseEntity.ok(gson.toJson("Message sent to the Redis JavaInUse Successfully"));
     }
 
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(value = "/rule/delete")
     public ResponseEntity<String> deleteRule(@RequestBody Entity entity) throws JsonProcessingException {
         redisSender.sendRule(entity);
-        return ResponseEntity.ok(gson.toJson("Message sent to the Kafka JavaInUse Successfully"));
+        return ResponseEntity.ok(gson.toJson("Message sent to the Redis JavaInUse Successfully"));
     }
 
 }
